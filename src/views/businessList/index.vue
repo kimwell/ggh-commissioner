@@ -7,7 +7,7 @@
         <scroller ref="scroller" :on-refresh="refresh" :on-infinite="infinite" refresh-layer-color="#4b8bf4" loading-layer-color="#ec4949">
           <div class="list-column">
             <div class="list" v-for="item in list" :key="item.userId">
-              <div class="list-main" @click="$router.push('/businessDetial-'+item.userId)">
+              <div class="list-main" @click="$router.push('/businessDetial-'+item.id)">
                 <div class="name">{{item.companyName}}</div>
                 <div class="address">{{item.address}}</div>
               </div>
@@ -73,7 +73,7 @@ export default {
     },
     //  获取列表
     getList() {
-      this.$http.get("/sys/salesManBuserInfo/findBuserInfoPage",{
+      this.$http.get("/sys/saleman/findBindBuser",{
             params: this.apiData
           }
         ).then(res => {

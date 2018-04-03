@@ -2,9 +2,8 @@
     <div class="company-warp">
         <h3>
             {{ company.companyName }}
-            <span class="iconfont icon-cheng" v-show="company.isFaithUser == 1"></span>
-            <span class="iconfont icon-bao" v-show="company.isGuaranteeUser == 1"></span>
-            <crown style="margin-left:.05rem" :level="company.level"></crown>
+            <span class="iconfont icon-cheng" v-show="company.isSellUser == 1"></span>
+            <crown style="margin-left:.05rem" :value="company.marginLevel"></crown>
         </h3>
         <p><span class="iconfont icon-hui"></span>{{ company.proInfo | emptyHlod('暂无') }}</p>
         <p><span class="iconfont icon-ziyuan"></span>{{ company.storeHouseName | emptyHlod('暂无') }}</p>
@@ -14,7 +13,7 @@
 </template>
 
 <script>
-import crown from '@/components/basic/crown/index.vue'
+import crown from '@/components/basic/grade.vue'
 export default {
   props:['company'],
   components: {

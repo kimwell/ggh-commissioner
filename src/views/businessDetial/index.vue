@@ -7,17 +7,18 @@
         <li class="column">
           <div class="column-left">资质认证</div>
           <div class="column-right">
-            <template v-if="list.isFaithUser == '1' || list.isGuaranteeUser == '1'">
-              <span class="iconfont icon-cheng" v-show="list.isFaithUser == '1'"></span>
-              <span class="iconfont icon-bao" v-show="list.isGuaranteeUser == '1'"></span>
+            <template v-if="list.isSellUser == '1'">
+              <span class="iconfont icon-cheng" v-show="list.isSellUser == '1'"></span>
+              <grade :value="list.marginLevel"></grade>
             </template>
             <span v-else>暂无</span>
           </div>
         </li>
-        <li class="column"><div class="column-left">注册手机</div><div class="column-right">{{tel}}</div></li>
-        <li class="column"><div class="column-left">入驻时间</div><div class="column-right">{{list.beBuserTime | dateformat}}</div></li>
+        <li class="column"><div class="column-left">加入联盟</div><div class="column-right">{{list.beBuserTime | dateformat}}</div></li>
+        <li class="column"><div class="column-left">注册手机</div><div class="column-right">{{list.buserMobile}}</div></li>
+        <li class="column"><div class="column-left">成为商家时间</div><div class="column-right">{{list.beBuserTime | dateformat}}</div></li>
         <li class="column"><div class="column-left">注册资金</div><div class="column-right">{{list.regMoney}}{{list.unit}}</div></li>
-        <li class="column"><div class="column-left">联系人</div><div class="column-right">{{list.contact}}</div></li>
+        <li class="column"><div class="column-left">联系人</div><div class="column-right">{{list.contactName}}</div></li>
         <li class="column"><div class="column-left">联系方式</div><div class="column-right">{{list.contactNum}}</div></li>
         <li class="column"><div class="column-left">公司地址</div><div class="column-right">{{list.address}}</div></li>
         <li class="column"><div class="column-left">优惠信息</div><div class="column-right">{{list.proInfo | emptyHlod(payload="暂无")}}</div></li>
@@ -29,15 +30,16 @@
 
 <script>
 import publicHead from "@/components/header";
+import grade from '@/components/basic/grade'
 
 export default {
   components: {
     publicHead,
+    grade
   },
   data() {
     return {
-      list: [],
-      tel: ''
+      list: []
     };
   },
   computed: {
@@ -47,14 +49,13 @@ export default {
   },
   methods: {
     getBusinessDetail(){
-      this.$http.get('/sys/salesManBuserInfo/findBuserInfo',{
+      this.$http.get('/sys/saleman/findBuserInfo',{
         params:{
-          userId: this.id
+          buserId: this.id
         }
       }).then(res =>{
         if(res.code === 1000){
-          this.list = res.data.buserInfo;
-          this.tel = res.data.mobile
+          this.list = res.data;
         }
       })
     }

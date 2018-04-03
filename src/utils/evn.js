@@ -13,7 +13,7 @@ let imgBaseUrl = 'http://tbxoss.oss-cn-hangzhou.aliyuncs.com';
 
 
 if (process.env.NODE_ENV == 'development') {
-    baseUrl = 'http://192.168.0.251';
+    baseUrl = 'http://192.168.0.164:8080';
 } else if (process.env.NODE_ENV == 'production') {
     // baseUrl = 'http://jiedan8.cn';
 }

@@ -1,62 +1,62 @@
 <template>
-  <div class="detail-container">
+  <div class="detail-container" v-if="resData.sellNum >= 0">
     <publicHead>求购详情</publicHead>
     <div class="status-banner">
-        <span class="status-str">{{ ironBuy.buyStatus | statusStr }}</span>
-        <div class="count-warp">
+        <span class="status-str">{{ resData.ironBuy.buyStatus | statusStr }}</span>
+        <!-- <div class="count-warp">
           <h3>{{ miss }}</h3>
           <p>错过</p>
-        </div>
+        </div> -->
         <div class="count-warp">
-          <h3>{{ vaild }}</h3>
+          <h3>{{ resData.sellNum }}</h3>
           <p>报价</p>
         </div>
     </div>
     <div class="iron-item">
       <div class="title">
-        <router-link :to="'businessDetial-'+company.userId">{{ company.companyName }}<span class="iconfont icon-arrow-right"></span></router-link>
-        <span class="date">{{ ironBuy.createTime | dateformat('MM/dd hh:mm') }}</span>
+        <router-link :to="'businessDetial-'+resData.ironBuy.buserId">{{ resData.ironBuy.createUser }}<span class="iconfont icon-arrow-right"></span></router-link>
+        <span class="date">{{ resData.ironBuy.createTime | dateformat('MM/dd hh:mm') }}</span>
       </div>
       <div class="content">
-        <h3>{{ `${ironBuy.ironTypeName}/${ironBuy.surfaceName}/${ironBuy.materialName}/${ironBuy.proPlacesName}` }}</h3>
-        <p>{{ ironBuy.specifications != '' ? ironBuy.specifications : `${ironBuy.height}*${ironBuy.width}*${ironBuy.length}` }} {{ ironBuy.tolerance != '' ? ironBuy.tolerance : ''}}</p>
+        <h3>{{ `${resData.ironBuy.ironTypeName}/${resData.ironBuy.surfaceName}/${resData.ironBuy.materialName}/${resData.ironBuy.proPlacesName}` }}</h3>
+        <p>{{ resData.ironBuy.specifications != '' ? resData.ironBuy.specifications : `${resData.ironBuy.height}*${resData.ironBuy.width}*${resData.ironBuy.length}` }} {{ resData.ironBuy.tolerance != '' ? resData.ironBuy.tolerance : ''}}</p>
         <p>
-          {{ ironBuy.numbers != '' ? ironBuy.numbers + ironBuy.numberUnit + ' ' : '' }}{{ ironBuy.weightUnit != '' ? ironBuy.weights + ironBuy.weightUnit : '' }}
+          {{ resData.ironBuy.numbers != '' ? resData.ironBuy.numbers + resData.ironBuy.numberUnit + ' ' : '' }}{{ resData.ironBuy.weightUnit != '' ? resData.ironBuy.weights + resData.ironBuy.weightUnit : '' }}
         </p>
         <p class="mark">
-          备注：{{ ironBuy.remark }}
+          备注：{{ resData.ironBuy.remark }}
         </p>
       </div>
       <div class="footer">
-        <a class="contant" :href="'tel:'+company.contactNum">联系买家</a>
+        <a class="contant" :href="'tel:'+resData.buy.contactNum">联系买家</a>
       </div>
     </div>
     <div class="offer-list">
-      <div class="contnet bt" v-if="ironBuy.buyStatus == 2">
+      <div class="contnet bt" v-if="resData.ironBuy.buyStatus == 2">
         <div class="item done">
-          <p><span class="price">成交价：{{ validSell[0].offerPerPrice }}元/{{ validSell[0].baseUnit }}</span></p>
-          <p class="remark">公差：{{ validSell[0].tolerance | emptyHlod('-') }}&nbsp;&nbsp;&nbsp;&nbsp;产地：{{ validSell[0].offerPlaces }}</p>
-          <p class="remark">备注：{{ validSell[0].offerRemark }}</p>
-          <Company :company="validSell[0]"></Company>
+          <p><span class="price">成交价：{{ resData.list[0].offerPerPrice }}元/{{ resData.list[0].baseUnit }}</span></p>
+          <p class="remark">公差：{{ resData.list[0].tolerance | emptyHlod('-') }}&nbsp;&nbsp;&nbsp;&nbsp;产地：{{ resData.list[0].offerPlaces }}</p>
+          <p class="remark">备注：{{ resData.list[0].offerRemark }}</p>
+          <Company :company="resData.list[0]"></Company>
         </div>
       </div>
       <p class="head">报价列表</p>
-      <div class="contnet" v-for="(item,index) in validSell" :key="index">
+      <div class="contnet" v-for="(item,index) in resData.list" :key="index">
         <div class="item">
           <p><span class="price">{{ item.offerPerPrice }}元/{{ item.baseUnit }}</span>  <span>{{ item.tolerance | emptyHlod('') }}</span>  {{ item.offerPlaces }}</p>
           <p class="remark">备注：{{ item.offerRemark }}</p>
           <Company :company="item"></Company>
         </div>
-        <span class="success iconfont icon-ziyuan1" v-if="ironBuy.buyStatus == 2 && index == 0"></span>
+        <span class="success iconfont icon-ziyuan1" v-if="resData.ironBuy.buyStatus == 2 && index == 0"></span>
       </div>
-      <div class="contnet" v-for="(item,index) in missSell" :key="index">
+      <!-- <div class="contnet" v-for="(item,index) in missSell" :key="index">
         <div class="item">
           <p><span class="price">该商家选择了忽略</span></p>
           <Company :company="item"></Company>
         </div>
-      </div>
+      </div> -->
     </div>
-    <p style="text-align:center" v-show="vaild == 0 && miss == 0">暂无报价</p>
+    <p style="text-align:center" v-show="resData.sellNum == 0">暂无报价</p>
   </div>
 </template>
 
@@ -70,64 +70,56 @@
     },
     data() {
       return {
-        missSell: [],
-        validSell: [],
-        ironBuy: {},
-        company: {}
+        resData: {}
       }
     },
     computed: {
       ironBuyId() {
         return this.$route.params.ironBuyId
-      },
-      // 报价数
-      vaild(){
-        return this.validSell.length
-      },
-      // 错过数
-      miss(){
-        return this.missSell.length
       }
     },
     filters: {
       statusStr(val){
         switch (val*1) {
+          case 0:
+            return '待报价'
+            break;
           case 1:
-            return '进行中'
+            return '待确认'
             break;
           case 2:
-            return '已成交'
-            break;
+            return '已完成'
+            break;  
           case 3:
-            return '已过期'
+            return '已失效'
             break;  
           default:
-            return '未知状态'
             break;
         }
       }
     },
     methods: {
       getData() {
-        this.$http.post('/sys/salemanIronBuy/queryBindIronSellInfo', {
+        this.$http.post('/sys/saleman/findSaleIronBuyInfo', {
           ironBuyId: this.ironBuyId
         }).then(res => {
           if (res.code === 1000) {
-            let data = res.data;
-            this.missSell = data.missSell;
-            this.validSell = data.validSell;
-            this.ironBuy = data.ironBuy;
-            this.company = {
-              companyName: data.companyName,
-              contact: data.contact,
-              contactNum: data.contactNum,
-              userId: data.userId,
-            }
+            this.resData = res.data
+            // let data = res.data;
+            // this.missSell = data.missSell;
+            // this.validSell = data.list;
+            // this.ironBuy = data.ironBuy;
+            // this.company = {
+            //   companyName: data.ironBuy.companyName,
+            //   contact: data.ironBuy.contact,
+            //   contactNum: data.ironBuy.contactNum,
+            //   userId: data.ironBuy.userId,
+            // }
           }
         })
       }
     },
-    created() {
+    mounted () {
       this.getData();
     }
   }

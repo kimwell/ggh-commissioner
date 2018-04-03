@@ -46,21 +46,25 @@
           userInfo: '',
           currentPage: 1,
           pageSize: 15,
-          buyStatus: 1 //1进行中，2成交，3失效
+          buyStatus: 0 //1进行中，2成交，3失效
         },
         status: [{
-            key: 1,
-            value: '进行中',
+            key: 0,
+            value: '待报价',
             count: 0
           },
           {
+            key: 1,
+            value: '待确认',
+            count: 0
+          },{
             key: 2,
-            value: '成交',
+            value: '已完成',
             count: 0
           },
           {
             key: 3,
-            value: '失效',
+            value: '已失效',
             count: 0
           }
         ],
@@ -105,16 +109,17 @@
       },
       // 获取列表数据
       getList(isFalsh = true) {
-        return this.$http.post('/sys/salemanIronBuy/queryBindIronBuyList', this.apiData).then(res => {
+        return this.$http.post('/sys/saleman/findSaleIronBuy', this.apiData).then(res => {
           if (res.code === 1000) {
             if (isFalsh) {
               this.list = res.data.list;
             } else {
               this.list.push(...res.data.list);
             }
-            this.status[0].count = res.data.ing;
-            this.status[1].count = res.data.get;
-            this.status[2].count = res.data.miss;
+            this.status[0].count = res.data.dbj;
+            this.status[1].count = res.data.dqr;
+            this.status[2].count = res.data.ycj;
+            this.status[3].count = res.data.ysx;
             this.totalCount = res.data.totalCount;
           }
         })
@@ -220,7 +225,9 @@
             position: absolute;
             right: 0;
             font-size: .16rem;
-            
+            &.status-0{
+              display: none;
+            }
             &.status-1{
               color: @status_green;
             }
@@ -258,7 +265,8 @@
       text-align: center;
       height: .44rem;
       line-height: .44rem;
-      .flex-grow;
+      // .flex-grow;
+      flex: 1;
       font-size: .14rem;
       border-right: 1px solid @line_light_gray;
       &:last-child {
