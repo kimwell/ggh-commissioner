@@ -20,6 +20,11 @@ export default {
               icon:'icon-keyuanguanli',
               link:'buys'
           },
+           {
+              name:'代发求购',
+              icon:'icon-fuwu',
+              link:'help'
+          },
           {
               name:'用户中心',
               icon:'icon-gerenzhongxin',

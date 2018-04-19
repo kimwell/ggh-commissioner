@@ -9,6 +9,9 @@ import FastClick from 'fastclick'
 import VueScroller from 'vue-scroller'
 import VueLocalStorage from 'vue-ls';
 import { Toast, MessageBox } from 'mint-ui'
+import { Picker } from 'mint-ui';
+
+
 import 'mint-ui/lib/style.css'
 
 if ('addEventListener' in document) {
@@ -19,6 +22,7 @@ if ('addEventListener' in document) {
 // 无限滚动插件
 Vue.use(VueScroller);
 Vue.use(VueLocalStorage);
+Vue.component(Picker.name, Picker);
 Vue.prototype.$Toast = Toast;
 Vue.prototype.$MessageBox = MessageBox;
 
@@ -26,6 +30,7 @@ Vue.prototype.$MessageBox = MessageBox;
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
 })
+Vue.prototype.$clearData = (data) => JSON.parse(JSON.stringify(data));
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false
 

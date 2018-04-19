@@ -73,9 +73,7 @@ export default {
     },
     //  获取列表
     getList() {
-      this.$http.get("/sys/saleman/findBindBuser",{
-            params: this.apiData
-          }
+      this.$http.post("/sys/saleman/findBindBuser",this.apiData
         ).then(res => {
           // console.log(res);
           if (res.code === 1000) {

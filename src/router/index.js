@@ -47,6 +47,16 @@ const router = new Router({
             component: resolve => require(['@/views/user/index.vue'], resolve)
         },
         {
+            path: '/help',
+            name: 'help',
+            component: resolve => require(['@/views/publish/index.vue'], resolve)
+        },
+        {
+            path: '/pbs:id',
+            name: 'pbs',
+            component: resolve => require(['@/views/publish/pbs.vue'], resolve)
+        },
+        {
             path: '/login',
             name: 'login',
             component: resolve => require(['@/views/login/index.vue'], resolve),
