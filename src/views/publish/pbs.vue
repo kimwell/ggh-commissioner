@@ -1,11 +1,11 @@
 <template>
   <div>
     <cityPicker title="货源地" v-model="city"></cityPicker>
-    <ajaxPicker title="品类" api="api/query/findIronTypes" v-model="iron"></ajaxPicker>
-    <ajaxPicker title="材质" api="api/query/findMaterials" v-model="material"></ajaxPicker>
-    <ajaxPicker title="表面" api="api/query/findSurFace" v-model="surface"></ajaxPicker>
+    <ajaxPicker title="品类" api="/api/query/findIronTypes" v-model="iron"></ajaxPicker>
+    <ajaxPicker title="材质" api="/api/query/findMaterials" v-model="material"></ajaxPicker>
+    <ajaxPicker title="表面" api="/api/query/findSurFace" v-model="surface"></ajaxPicker>
     <specInput v-model="spec" title="规格" :ironType="iron" :surface="surface"></specInput>
-    <ajaxPicker title="产地" multi api="api/query/findProPlaces" v-model="proplace"></ajaxPicker>
+    <ajaxPicker title="产地" multi api="/api/query/findProPlaces" v-model="proplace"></ajaxPicker>
     <pbInput title="重量" v-model="item.weights" :unit="item.weightUnit"></pbInput>
     <pbInput title="数量" v-model="item.numbers" :unit="item.numberUnit"></pbInput>
     <pbInput title="公差" v-model="item.tolerance" :disable="iron.name != '不锈钢板' &&  iron.name != '不锈钢卷'"></pbInput>
@@ -88,7 +88,7 @@
     watch: {
       iron(val) {
         // 根据选择的品类，查询对应的单位
-        this.$http.post('api/query/findIronAndUnitByIronId', {
+        this.$http.post('/api/query/findIronAndUnitByIronId', {
           ironId: val.id
         }).then(res => {
           if (res.code === 1000) {
@@ -184,7 +184,7 @@
       // 发布
       pub() {
         if (this.ckeckItem && this.checkUnit) {
-          this.$http.post('sys/ironBuySubstitute/saleIronBuyInfoSaveList', {
+          this.$http.post('/sys/ironBuySubstitute/saleIronBuyInfoSaveList', {
             ironBuyInfos: JSON.stringify([this.item]),
             buserId: this.id
           }).then(res => {

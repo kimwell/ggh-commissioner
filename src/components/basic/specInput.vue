@@ -144,14 +144,14 @@
         },
         methods: {
             getBy5() {
-                this.$http.post('api/query/findIronAndSurfaceAndSpecificationlist', this.params).then(res => {
+                this.$http.post('/api/query/findIronAndSurfaceAndSpecificationlist', this.params).then(res => {
                     if (res.code === 1000) {
                         this.rdList = res.data
                     }
                 })
             },
             getBy2() {
-                this.$http.post('api/query/findIronAndSurfaceAndSpecificationHeightAndLength', {
+                this.$http.post('/api/query/findIronAndSurfaceAndSpecificationHeightAndLength', {
                     surface: this.params.surface,
                     ironType: this.params.ironType
                 }).then(res => {

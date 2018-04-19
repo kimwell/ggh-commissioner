@@ -58,17 +58,17 @@
                 tabs: [{
                     label: '请选择',
                     active: null,
-                    api: 'api/query/findProvince',
+                    api: '/api/query/findProvince',
                     list: []
                 }, {
                     label: '请选择',
                     active: null,
-                    api: 'api/query/findCity',
+                    api: '/api/query/findCity',
                     list: []
                 }, {
                     label: '请选择',
                     active: null,
-                    api: 'api/query/findDistrict',
+                    api: '/api/query/findDistrict',
                     list: []
                 }],
                 activeTab: 0,
