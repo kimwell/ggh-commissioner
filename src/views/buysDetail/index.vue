@@ -38,6 +38,9 @@
           <p><span class="price">成交价：{{ resData.list[0].offerPerPrice }}元/{{ resData.list[0].baseUnit }}</span></p>
           <p class="remark">公差：{{ resData.list[0].tolerance | emptyHlod('-') }}&nbsp;&nbsp;&nbsp;&nbsp;产地：{{ resData.list[0].offerPlaces }}</p>
           <p class="remark">备注：{{ resData.list[0].offerRemark }}</p>
+          <p class="remark">报价时间： {{ resData.list[0].createTime | dateformat }}</p>
+          <p class="remark">成交时间： {{ resData.list[0].updateTime | dateformat }}</p>
+          <p class="remark">到货时间： {{ resData.list[0].deliveryTime | dateformat }}</p>
           <Company :company="resData.list[0]"></Company>
         </div>
       </div>

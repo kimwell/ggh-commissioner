@@ -12,9 +12,10 @@
               <grade :value="list.marginLevel"></grade>
             </template>
             <span v-else>暂无</span>
+            {{ list.marginLevel }}
           </div>
         </li>
-        <li class="column"><div class="column-left">加入联盟</div><div class="column-right">{{list.beBuserTime | dateformat}}</div></li>
+        <li class="column"><div class="column-left">加入联盟</div><div class="column-right">{{list.beUserTime | dateformat}}</div></li>
         <li class="column"><div class="column-left">注册手机</div><div class="column-right">{{list.buserMobile}}</div></li>
         <li class="column"><div class="column-left">成为商家时间</div><div class="column-right">{{list.beBuserTime | dateformat}}</div></li>
         <li class="column"><div class="column-left">注册资金</div><div class="column-right">{{list.regMoney}}{{list.unit}}</div></li>
