@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div style="padding-top:.5rem">
+    <publicHead>发布求购</publicHead>
     <cityPicker title="货源地" v-model="city"></cityPicker>
     <ajaxPicker title="品类" api="/api/query/findIronTypes" v-model="iron"></ajaxPicker>
     <ajaxPicker title="材质" api="/api/query/findMaterials" v-model="material"></ajaxPicker>
@@ -15,19 +16,21 @@
     </div>
   
     <div class="btns">
-      <a>保存</a>
+      <!-- <a>保存</a> -->
       <a class="blue" @click="pub">发布</a>
     </div>
   </div>
 </template>
 
 <script>
+  import publicHead from '@/components/header'
   import ajaxPicker from '@/components/basic/ajaxPicker.vue'
   import cityPicker from '@/components/basic/cityPicker.vue'
   import pbInput from '@/components/basic/pbInput.vue'
   import specInput from '@/components/basic/specInput.vue'
   export default {
     components: {
+      publicHead,
       ajaxPicker,
       cityPicker,
       pbInput,
@@ -231,15 +234,13 @@
   }
   
   .btns {
-    position: fixed;
     width: 100%;
     height: .44rem;
-    bottom: .2rem;
-    left: 0;
     text-align: center;
+    margin-top: .2rem;
     a {
       display: inline-block;
-      margin: 0 .1rem;
+      // margin: 0 .1rem;
       width: 1.5rem;
       height: .44rem;
       line-height: .44rem;
@@ -248,6 +249,7 @@
       color: @base_blue;
       border: 2px solid @base_blue;
       &.blue {
+        width: 3rem;
         background-color: @base_blue;
         color: #fff;
       }

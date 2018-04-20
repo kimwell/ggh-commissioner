@@ -14,11 +14,12 @@
     </div>
     <div class="iron-item">
       <div class="title">
-        <router-link :to="'businessDetial-'+resData.ironBuy.buserId">{{ resData.ironBuy.createUser }}<span class="iconfont icon-arrow-right"></span></router-link>
+        <router-link :to="'businessDetial-'+resData.ironBuy.buserId">{{ resData.buy.companyName }}<span class="iconfont icon-arrow-right"></span></router-link>
         <span class="date">{{ resData.ironBuy.createTime | dateformat('MM/dd hh:mm') }}</span>
       </div>
       <div class="content">
-        <h3>{{ `${resData.ironBuy.ironTypeName}/${resData.ironBuy.surfaceName}/${resData.ironBuy.materialName}/${resData.ironBuy.proPlacesName}` }}</h3>
+        <h3>{{ `${resData.ironBuy.locationName}/${resData.ironBuy.ironTypeName}/${resData.ironBuy.surfaceName}/${resData.ironBuy.materialName}` }}</h3>
+        <p>产地：{{ resData.ironBuy.proPlacesName }}</p>
         <p>{{ resData.ironBuy.specifications != '' ? resData.ironBuy.specifications : `${resData.ironBuy.height}*${resData.ironBuy.width}*${resData.ironBuy.length}` }} {{ resData.ironBuy.tolerance != '' ? resData.ironBuy.tolerance : ''}}</p>
         <p>
           {{ resData.ironBuy.numbers != '' ? resData.ironBuy.numbers + resData.ironBuy.numberUnit + ' ' : '' }}{{ resData.ironBuy.weightUnit != '' ? resData.ironBuy.weights + resData.ironBuy.weightUnit : '' }}

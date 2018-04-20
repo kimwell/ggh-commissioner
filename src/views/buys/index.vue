@@ -148,7 +148,7 @@
         // 如果从详情回来，则不做初始化
         if(this.fromDetail)
           return false
-        this.statusActive = 0;
+        // this.statusActive = 0;
         this.apiData.userInfo = '';
         this.getList();
       }

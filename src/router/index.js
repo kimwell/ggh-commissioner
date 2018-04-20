@@ -15,10 +15,15 @@ if (Vue.ls.get('authorization_zy')) {
 }
 const router = new Router({
     mode: routerMode,
-    base: '/zy/',
-    redirect: '/businessList',
+    base: '/zy',
     routes: [{
+            path: '/',
+            redirect: '/businessList',
+            name: 'index',
+            component: resolve => require(['@/views/main.vue'], resolve)
+        }, {
             path: '/businessList',
+            name: 'businessList',
             component: resolve => require(['@/views/businessList/index.vue'], resolve),
             meta: {
                 keepAlive: true
