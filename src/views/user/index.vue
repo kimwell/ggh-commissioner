@@ -56,10 +56,10 @@ export default {
   height: 100%;
   padding: 0.46rem 0 0.5rem 0;
   .head-logo {
-    width: 1.6rem;
-    height: 1.6rem;
-    .borderRadius(0.8rem);
-    margin: 0.5rem auto 0.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    .borderRadius(0.6rem);
+    margin: 0.2rem auto 0.2rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -101,21 +101,22 @@ export default {
     .borderRadius(0.05rem);
   }
   .user-menu {
-    padding: 0.6rem 0;
+    padding: 0.4rem 0;
   }
   .user-menu li {
     position: relative;
-    line-height: 0.4rem;
+    line-height: 0.6rem;
     background-color: #fff;
     padding: 0 0.3rem;
     border-bottom: 1px solid #e6e6e6;
+    font-size: .17rem;
     &:last-child {
       border-bottom: 0;
     }
     &::after {
       content: "";
       position: absolute;
-      top: 0.15rem;
+      top: 0.24rem;
       right: 0.2rem;
       width: 0.1rem;
       height: 0.1rem;

@@ -8,7 +8,7 @@
       </div>
       <div>
         <div v-for="item in list" class="companyName">
-          {{item.companyName}}
+          {{item.companyName}}<span v-if="item.pass != '1'" class="unpass">审核未通过</span>
         </div>
       </div>
     </div>
@@ -76,6 +76,16 @@ export default {
   .companyName {
     line-height: 0.36rem;
     padding: 0 0.2rem;
+  }
+  .unpass{
+    display: inline-block;
+    background-color: #116CD6;
+    color: #fff;
+    border-radius: .1rem;
+    margin-left: .1rem;
+    height: .2rem;
+    line-height: .2rem;
+    padding: 0 .15rem;
   }
 }
 </style>

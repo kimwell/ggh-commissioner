@@ -40,9 +40,10 @@
       <div class="list">
         <div class="list-item" v-for="item in list">
           <div class="item-header list-cell">
-            <span class="time">{{item.beBuserTime | dateformat}}</span> {{item.companyName}}
+            {{item.companyName}}
           </div>
-          <div class="list-cell saleMan"><span>{{item.saleName}}</span><span>{{item.saleMobile}}</span></div>
+          <div class="list-cell">入驻时间：{{item.beBuserTime | dateformat}}</div>
+          <div class="list-cell saleMan"><span>{{item.contactName}}</span><span>{{item.contactNum}}</span></div>
           <div class="item-cell list-cell">
             <div class="item-cell-row">登录<span class="day">{{item.signNum}}</span>天</div>
             <div class="item-cell-row">登录使用率：{{item.signRate}}%</div>
@@ -108,9 +109,11 @@
       }
     },
     methods: {
+      open(picker) {
+        this.$refs[picker].open();
+      },
       getList() {
         this.$http.post("/sys/saleman/buserData", this.dataApi).then(res => {
-          console.log(res);
           this.list = res.data.list;
         });
       },
@@ -124,6 +127,8 @@
           currentPage: 1,
           pageSize: 10
         };
+        this.loginStatus = null;
+        this.ironStatus= null;
         this.getList();
       },
       searchData() {
