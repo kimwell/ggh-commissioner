@@ -10,6 +10,7 @@
 let baseUrl = '';
 let routerMode = 'history';
 let imgBaseUrl = 'http://tbxoss.oss-cn-hangzhou.aliyuncs.com';
+let host = window.location.host;
 
 
 if (process.env.NODE_ENV == 'development') {

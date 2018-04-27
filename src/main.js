@@ -9,7 +9,7 @@ import FastClick from 'fastclick'
 import VueScroller from 'vue-scroller'
 import VueLocalStorage from 'vue-ls';
 import { Toast, MessageBox } from 'mint-ui'
-import { Picker } from 'mint-ui';
+import { Picker,DatetimePicker,Button } from 'mint-ui';
 
 
 import 'mint-ui/lib/style.css'
@@ -23,6 +23,8 @@ if ('addEventListener' in document) {
 Vue.use(VueScroller);
 Vue.use(VueLocalStorage);
 Vue.component(Picker.name, Picker);
+Vue.component(Button.name, Button);
+Vue.component(DatetimePicker.name,DatetimePicker)
 Vue.prototype.$Toast = Toast;
 Vue.prototype.$MessageBox = MessageBox;
 

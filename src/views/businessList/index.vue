@@ -2,7 +2,7 @@
   <div class="container">
     <publicHead>
       商家列表
-      <router-link slot="right" to="/index">注册查询</router-link>  
+      <router-link slot="right" to="/businessSearch">注册查询</router-link>  
     </publicHead>
     <div class="mid-container">
       <search v-model="apiData.queryMessage" ref="search"></search>
