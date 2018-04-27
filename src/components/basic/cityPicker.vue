@@ -120,8 +120,8 @@
                 let activeList = this.tabs[this.activeTab];
                 // 当前选中的数据
                 let pickItem = activeList.list[index];
-                
-                
+    
+    
                 // 判断是否选中完毕？activeTab是否等于level
                 if (this.activeTab < this.level) {
                     // 跳转下一级操作
@@ -322,6 +322,7 @@
     .item-list {
         width: 100%;
         height: 100%;
+        overflow-x: hidden;
     }
     
     .item-list .item {

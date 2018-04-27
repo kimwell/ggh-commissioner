@@ -40,7 +40,7 @@
           <p class="remark">备注：{{ resData.list[0].offerRemark }}</p>
           <p class="remark">报价时间： {{ resData.list[0].createTime | dateformat }}</p>
           <p class="remark">成交时间： {{ resData.list[0].updateTime | dateformat }}</p>
-          <p class="remark">到货时间： {{ resData.list[0].deliveryTime | dateformat }}</p>
+          <p class="remark">交货时间： {{ resData.list[0].deliveryTime | dateformat('yyyy-MM-dd') }}</p>
           <Company :company="resData.list[0]"></Company>
         </div>
       </div>
@@ -49,6 +49,7 @@
         <div class="item">
           <p><span class="price">{{ item.offerPerPrice }}元/{{ item.baseUnit }}</span>  <span>{{ item.tolerance | emptyHlod('') }}</span>  {{ item.offerPlaces }}</p>
           <p class="remark">备注：{{ item.offerRemark }}</p>
+          <p class="remark">交货时间： {{ resData.list[0].deliveryTime | dateformat('yyyy-MM-dd') }}</p>
           <Company :company="item"></Company>
         </div>
         <span class="success iconfont icon-ziyuan1" v-if="resData.ironBuy.buyStatus == 2 && index == 0"></span>
