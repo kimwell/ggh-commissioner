@@ -125,7 +125,7 @@
       getList() {
         this.$http.post("/sys/saleman/saleManData", this.dataApi).then(res => {
           if (res.code === 1000) {
-            this.list = res.data;
+            this.list = res.data.data;
           }
         });
       },

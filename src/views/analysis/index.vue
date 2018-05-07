@@ -114,7 +114,14 @@
       },
       getList() {
         this.$http.post("/sys/saleman/buserData", this.dataApi).then(res => {
-          this.list = res.data.list;
+          if(res.code === 1000){
+            if (this.dataApi.currentPage === 1) {
+              this.list = res.data.list;
+            } else {
+              this.list.push(...res.data.list);
+            }
+            this.maxCount = res.data.totalCount;
+          }
         });
       },
       clearData() {
